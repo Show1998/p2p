@@ -50,4 +50,10 @@ public interface LoanInfoMapper {
      * @mbggenerated Mon Jun 27 00:09:40 CST 2022
      */
     int updateByPrimaryKey(LoanInfo record);
+
+    /**
+     * 查询所有产品的平均年化收益率
+     * @return
+     */
+    double selectAvgRate();
 }
