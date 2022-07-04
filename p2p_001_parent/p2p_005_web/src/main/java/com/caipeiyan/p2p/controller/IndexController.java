@@ -1,6 +1,7 @@
 package com.caipeiyan.p2p.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.caipeiyan.p2p.Constants;
 import com.caipeiyan.p2p.service.loan.LoanInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class IndexController {
 
         //查询历史收益率
         double avgRate = loanInfoService.queryAvgRate();
-        request.setAttribute("avgRate", avgRate);
+        request.setAttribute(Constants.AVG_RATE, avgRate);
 
 
         return "index";
