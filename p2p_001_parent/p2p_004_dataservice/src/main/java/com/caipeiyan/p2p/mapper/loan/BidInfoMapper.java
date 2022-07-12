@@ -50,4 +50,6 @@ public interface BidInfoMapper {
      * @mbggenerated Mon Jun 27 00:09:40 CST 2022
      */
     int updateByPrimaryKey(BidInfo record);
+
+    Double selectBidMoney();
 }

@@ -23,6 +23,7 @@
     <result column="product_desc" property="productDesc" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="INTEGER" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
@@ -33,6 +34,7 @@
     left_product_money, bid_min_limit, bid_max_limit, product_status, product_full_time,
     product_desc, version
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -44,6 +46,7 @@
     from b_loan_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -53,6 +56,7 @@
     delete from b_loan_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.caipeiyan.p2p.pojo.loan.LoanInfo" >
     <!--
       WARNING - @mbggenerated
@@ -72,6 +76,7 @@
       #{productFullTime,jdbcType=TIMESTAMP}, #{productDesc,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.caipeiyan.p2p.pojo.loan.LoanInfo" >
     <!--
       WARNING - @mbggenerated
@@ -227,6 +232,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.caipeiyan.p2p.pojo.loan.LoanInfo" >
     <!--
       WARNING - @mbggenerated
@@ -255,4 +261,12 @@
   <select id="selectAvgRate" resultType="double">
     select cast(avg(rate) as decimal (10,2)) from b_loan_info;
   </select>
+
+<!--    List<LoanInfo> selectProduct(Map map);-->
+    <select id="selectProduct" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from b_loan_info
+        where product_type = #{paramType} order by rate desc
+        limit #{pageNumber},#{pageSize};
+    </select>
 </mapper>

@@ -50,4 +50,7 @@ public interface UserMapper {
      * @mbggenerated Mon Jun 27 00:09:40 CST 2022
      */
     int updateByPrimaryKey(User record);
+
+    //查询总的用户数量
+    int selectAmountOfUser();
 }

@@ -165,4 +165,8 @@
       header_image = #{headerImage,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<!--   int selectAmountOfUser();-->
+  <select id="selectAmountOfUser" resultType="int">
+    select count(*) from u_user;
+  </select>
 </mapper>
