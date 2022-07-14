@@ -8,5 +8,5 @@ import java.util.Map;
 public interface LoanInfoService {
     double queryAvgRate();
 
-    List<LoanInfo> queryProduct(Map<String,Integer> map);
+    List<LoanInfo> queryProduct(Map<String,Object> map);
 }

@@ -7,6 +7,7 @@ import com.caipeiyan.p2p.service.loan.BidInfoService;
 import com.caipeiyan.p2p.service.loan.LoanInfoService;
 import com.caipeiyan.p2p.service.user.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class IndexController {
     BidInfoService bidInfoService;
 
     @RequestMapping("/index")
-    public String toIndex(HttpServletRequest request){
+    public String toIndex(HttpServletRequest request, Model model){
 
         //查询历史收益率
         double avgRate = loanInfoService.queryAvgRate();
@@ -39,7 +40,7 @@ public class IndexController {
         Double bidMoney = bidInfoService.queryBidMoney();
         request.setAttribute(Constants.BID_MONEY, bidMoney);
         //产品展示
-        Map<String,Integer> paramMap = new HashMap<>();
+        Map<String,Object> paramMap = new HashMap<>();
         paramMap.put("paramType", 0);
         paramMap.put("pageNumber", 0);
         paramMap.put("pageSize", 1);
@@ -50,9 +51,9 @@ public class IndexController {
         paramMap.put("paramType",2);
         paramMap.put("pageSize", 8);
         List<LoanInfo> loanInfoZ = loanInfoService.queryProduct(paramMap);
-        request.setAttribute("loanInfoX",loanInfoX);
-        request.setAttribute("loanInfoY",loanInfoY);
-        request.setAttribute("loanInfoZ",loanInfoZ);
+        model.addAttribute("loanInfoListX",loanInfoX);
+        model.addAttribute("loanInfoListY",loanInfoY);
+        model.addAttribute("loanInfoListZ",loanInfoZ);
         return "index";
     }
 }

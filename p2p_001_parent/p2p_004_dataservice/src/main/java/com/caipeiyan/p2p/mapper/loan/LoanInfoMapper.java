@@ -60,5 +60,5 @@ public interface LoanInfoMapper {
      */
     double selectAvgRate();
 
-    List<LoanInfo> selectProduct(Map<String,Integer> map);
+    List<LoanInfo> selectProduct(Map<String,Object> map);
 }

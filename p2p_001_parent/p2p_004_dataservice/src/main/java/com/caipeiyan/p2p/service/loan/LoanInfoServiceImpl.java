@@ -39,7 +39,7 @@ public class LoanInfoServiceImpl implements LoanInfoService{
     }
 
     @Override
-    public List<LoanInfo> queryProduct(Map<String, Integer> map) {
+    public List<LoanInfo> queryProduct(Map<String, Object> map) {
         return loanInfoMapper.selectProduct(map);
     }
 }
