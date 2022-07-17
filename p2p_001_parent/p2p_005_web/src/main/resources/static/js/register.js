@@ -43,4 +43,31 @@ $(function() {
 			$("#btnRegist").addClass("fail");
 		}
 	});
+	$("#phone").blur(function () {
+		var phone = $.trim($("#phone").val());
+		if(phone == ''){
+			showError("phone","请输入手机号")
+		}else if(!/^1(3[0-9]|4[01456879]|5[0-35-9]|6[2567]|7[0-8]|8[0-9]|9[0-35-9])\d{8}$/.test(phone)){
+			showError("phone","请输入正确的手机号！");
+		}else {
+			//查询数据库，手机号是否可用
+			$.ajax({
+				url:"/p2p/loan/checkPhone",
+				type:"get",
+				data:{"phone":phone},
+				success:function (data){
+					if(data.result == 1){
+						showSuccess("phone")
+					}else showError("phone","此手机号已经注册！请直接登录！")
+				},
+				error:function () {
+					showError("phone","系统繁忙，请稍后重试！")
+				}
+			})
+			showSuccess("phone");
+		}
+	})
+	$("#phone").focus(function () {
+		hideError("phone")
+	})
 });

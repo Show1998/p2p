@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Service(interfaceClass = UserService.class , version = "1.0.0" ,timeout = 15000)
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService{
                 amountOfUser = (Integer) redisTemplate.opsForValue().get(Constants.AMOUNT_OF_USER);
                 if (!ObjectUtils.allNotNull(amountOfUser)){
                    amountOfUser =  userMapper.selectAmountOfUser();
-                   redisTemplate.opsForValue().set(Constants.AMOUNT_OF_USER, amountOfUser);
+                   redisTemplate.opsForValue().set(Constants.AMOUNT_OF_USER, amountOfUser,60, TimeUnit.SECONDS);
                 }
             }
         }

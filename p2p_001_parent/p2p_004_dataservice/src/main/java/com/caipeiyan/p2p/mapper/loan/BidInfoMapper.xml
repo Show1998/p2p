@@ -13,6 +13,9 @@
     <result column="bid_money" property="bidMoney" jdbcType="DOUBLE" />
     <result column="bid_time" property="bidTime" jdbcType="TIMESTAMP" />
     <result column="bid_status" property="bidStatus" jdbcType="INTEGER" />
+    <association property="user" javaType="com.caipeiyan.p2p.pojo.user.User">
+      <result column="phone" property="phone" jdbcType="VARCHAR"></result>
+    </association>
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
@@ -146,5 +149,12 @@
 <!--  int selectBidMoney();-->
   <select id="selectBidMoney" resultType="java.lang.Double">
     select sum(bid_money) from b_bid_info;
+  </select>
+<!--  List<BidInfo> selectConsumerById(Integer id);-->
+  <select id="selectConsumerById" resultMap="BaseResultMap" parameterType="int">
+    select bid_money,bid_time,phone from b_bid_info b
+        left join u_user u on b.uid = u.id
+    where loan_id = #{id}
+        order by bid_time desc limit 0,10;
   </select>
 </mapper>

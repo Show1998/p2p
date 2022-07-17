@@ -3,6 +3,7 @@ package com.caipeiyan.p2p.service.loan;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.caipeiyan.p2p.Constants;
 import com.caipeiyan.p2p.mapper.loan.LoanInfoMapper;
+import com.caipeiyan.p2p.pojo.common.PageAndVo;
 import com.caipeiyan.p2p.pojo.loan.LoanInfo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -31,7 +32,7 @@ public class LoanInfoServiceImpl implements LoanInfoService{
                 avgRate = (Double) redisTemplate.opsForValue().get(Constants.AVG_RATE);
                 if(ObjectUtils.allNull(avgRate)){
                     avgRate = loanInfoMapper.selectAvgRate();
-                    redisTemplate.opsForValue().set(Constants.AVG_RATE, avgRate, 60, TimeUnit.MINUTES);
+                    redisTemplate.opsForValue().set(Constants.AVG_RATE, avgRate, 60, TimeUnit.SECONDS);
                 }
             }
         }
@@ -42,4 +43,23 @@ public class LoanInfoServiceImpl implements LoanInfoService{
     public List<LoanInfo> queryProduct(Map<String, Object> map) {
         return loanInfoMapper.selectProduct(map);
     }
+
+    @Override
+    public Integer queryAmountOfProdunt(Map<String, Object> map){
+        return loanInfoMapper.selectAmountOfProduct(map);
+    }
+
+    @Override
+    public PageAndVo queryProductByPage(Map<String, Object> map) {
+        List<LoanInfo> loanInfos = this.queryProduct(map);
+        Integer integer = this.queryAmountOfProdunt(map);
+        PageAndVo<LoanInfo> pageAndVo = new PageAndVo<>(loanInfos,integer);
+        return pageAndVo;
+    }
+
+    @Override
+    public LoanInfo queryProductById(Integer id) {
+        return loanInfoMapper.selectByPrimaryKey(id);
+    }
+
 }

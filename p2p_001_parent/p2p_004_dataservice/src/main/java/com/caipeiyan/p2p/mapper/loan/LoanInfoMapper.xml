@@ -266,7 +266,22 @@
     <select id="selectProduct" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
         from b_loan_info
-        where product_type = #{paramType} order by rate desc
+        <where >
+          <if test="paramType != null">
+            product_type = #{paramType}
+          </if>
+        </where>
+        order by rate desc
         limit #{pageNumber},#{pageSize};
+    </select>
+<!--  Integer selectAmountOfProduct(Map<String,Object> map);-->
+    <select id="selectAmountOfProduct" resultType="int">
+      select count(*)
+      from b_loan_info
+      <where >
+        <if test="paramType != null">
+          product_type = #{paramType}
+        </if>
+      </where>
     </select>
 </mapper>

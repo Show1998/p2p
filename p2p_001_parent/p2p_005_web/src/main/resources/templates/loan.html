@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/share.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
     <style type="text/css">body{background:#f2f2f2;}</style>
-    <title>散标,互联网金融产品列表-动力金融网,专业的互联网金融信息服务平台</title>
+    <title>散标,互联网金融产品列表,专业的互联网金融信息服务平台</title>
 </head>
 
 <body>
@@ -23,249 +23,104 @@
 <div id="loanList">
 	<div class="mainBox pro-list-body clearfix" id="rollingLayer">
   	<div class="pro-list">
+		<div th:each="loan:${loanInfoList}">
+			<div th:class="${loan.leftProductMoney eq 0 ? 'pro-box pro-full' :'pro-box '}">
+				<div class="pro-top">
+					<h3 th:text="${loan.productName}">个人信用消费借款</h3>
+					<p>特选小额信贷消费产品</p>
+				</div>
+				<div class="pro-main" style="height:260px;">
+					<div class="pro-rate">
+						<div class="rate" th:text="|${loan.rate}%|">
+							5.6<span>%</span>
+						</div>
+						<h3>历史年化收益率</h3>
+					</div>
+					<div class="pro-data clearfix">
+						<div class="pro-cycle">
+							<h3>投资周期</h3>
+							<div class="data"><span th:text="|${loan.productType eq 0 ? loan.cycle + '天' : loan.cycle + '个月'}|">1个月</span></div>
+						</div>
+						<div class="pro-money">
+							<h3>剩余可投金额</h3>
+							<div class="data" >
+								<span th:text="${loan.leftProductMoney}">140000</span>元
+							</div>
+						</div>
+					</div>
+					<div class="pro-btn">
+						<a th:href="@{/loan/loanInfo(productId=${loan.id})}" class="btn-1">立即投资</a><!--已满标按钮-->
+					</div>
+				</div>
+			</div>
+
+		</div>
 	   	<!--已满标时追加pro-full-->
-		<div class="pro-box pro-full">
-		    <div class="pro-top">
-		      <h3>个人信用消费借款</h3>
-		      <p>动力金融网特选小额信贷消费产品</p>
-		    </div>
-		    <div class="pro-main" style="height:260px;">
-		      <div class="pro-rate">
-	        <div class="rate">5<span>%</span></div>
-		        <h3>历史年化收益率</h3>
-		      </div>
-		      <div class="pro-data clearfix">
-		        <div class="pro-cycle">
-		          <h3>投资周期</h3>
-		          <div class="data"><span>9</span>个月</div>
-		        </div>
-		        <div class="pro-money">
-		          <h3>剩余可投金额</h3>
-		          <div class="data">
-					<span>140000</span>元
-				  </div>
-		        </div>
-		      </div>
-		      <div class="pro-btn">     
-				<a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-		      </div>
-		    </div>
-		  </div>
 
-		  <div class="pro-box">
-			  <div class="pro-top">
-				  <h3>个人信用消费借款</h3>
-				  <p>动力金融网特选小额信贷消费产品</p>
-			  </div>
-			  <div class="pro-main" style="height:260px;">
-				  <div class="pro-rate">
-					  <div class="rate">5<span>%</span></div>
-					  <h3>历史年化收益率</h3>
-				  </div>
-				  <div class="pro-data clearfix">
-					  <div class="pro-cycle">
-						  <h3>投资周期</h3>
-						  <div class="data"><span>9</span>个月</div>
-					  </div>
-					  <div class="pro-money">
-						  <h3>剩余可投金额</h3>
-						  <div class="data">
-							  <span>140000</span>元
-						  </div>
-					  </div>
-				  </div>
-				  <div class="pro-btn">
-					  <a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				  </div>
-			  </div>
-		  </div>
-
-		<div class="pro-box">
-			<div class="pro-top">
-				<h3>个人信用消费借款</h3>
-				<p>动力金融网特选小额信贷消费产品</p>
-			</div>
-			<div class="pro-main" style="height:260px;">
-				<div class="pro-rate">
-					<div class="rate">5<span>%</span></div>
-					<h3>历史年化收益率</h3>
-				</div>
-				<div class="pro-data clearfix">
-					<div class="pro-cycle">
-						<h3>投资周期</h3>
-						<div class="data"><span>9</span>个月</div>
-					</div>
-					<div class="pro-money">
-						<h3>剩余可投金额</h3>
-						<div class="data">
-							<span>140000</span>元
-						</div>
-					</div>
-				</div>
-				<div class="pro-btn">
-					<a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				</div>
-			</div>
-		</div>
-
-		<div class="pro-box">
-			<div class="pro-top">
-				<h3>个人信用消费借款</h3>
-				<p>动力金融网特选小额信贷消费产品</p>
-			</div>
-			<div class="pro-main" style="height:260px;">
-				<div class="pro-rate">
-					<div class="rate">5<span>%</span></div>
-					<h3>历史年化收益率</h3>
-				</div>
-				<div class="pro-data clearfix">
-					<div class="pro-cycle">
-						<h3>投资周期</h3>
-						<div class="data"><span>9</span>个月</div>
-					</div>
-					<div class="pro-money">
-						<h3>剩余可投金额</h3>
-						<div class="data">
-							<span>140000</span>元
-						</div>
-					</div>
-				</div>
-				<div class="pro-btn">
-					<a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				</div>
-			</div>
-		</div>
-
-		  <div class="pro-box pro-full">
-			  <div class="pro-top">
-				  <h3>个人信用消费借款</h3>
-				  <p>动力金融网特选小额信贷消费产品</p>
-			  </div>
-			  <div class="pro-main" style="height:260px;">
-				  <div class="pro-rate">
-					  <div class="rate">5<span>%</span></div>
-					  <h3>历史年化收益率</h3>
-				  </div>
-				  <div class="pro-data clearfix">
-					  <div class="pro-cycle">
-						  <h3>投资周期</h3>
-						  <div class="data"><span>9</span>个月</div>
-					  </div>
-					  <div class="pro-money">
-						  <h3>剩余可投金额</h3>
-						  <div class="data">
-							  <span>140000</span>元
-						  </div>
-					  </div>
-				  </div>
-				  <div class="pro-btn">
-					  <a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				  </div>
-			  </div>
-		  </div>
-
-		<div class="pro-box">
-			<div class="pro-top">
-				<h3>个人信用消费借款</h3>
-				<p>动力金融网特选小额信贷消费产品</p>
-			</div>
-			<div class="pro-main" style="height:260px;">
-				<div class="pro-rate">
-					<div class="rate">5<span>%</span></div>
-					<h3>历史年化收益率</h3>
-				</div>
-				<div class="pro-data clearfix">
-					<div class="pro-cycle">
-						<h3>投资周期</h3>
-						<div class="data"><span>9</span>个月</div>
-					</div>
-					<div class="pro-money">
-						<h3>剩余可投金额</h3>
-						<div class="data">
-							<span>140000</span>元
-						</div>
-					</div>
-				</div>
-				<div class="pro-btn">
-					<a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				</div>
-			</div>
-		</div>
-
-		<div class="pro-box">
-			<div class="pro-top">
-				<h3>个人信用消费借款</h3>
-				<p>动力金融网特选小额信贷消费产品</p>
-			</div>
-			<div class="pro-main" style="height:260px;">
-				<div class="pro-rate">
-					<div class="rate">5<span>%</span></div>
-					<h3>历史年化收益率</h3>
-				</div>
-				<div class="pro-data clearfix">
-					<div class="pro-cycle">
-						<h3>投资周期</h3>
-						<div class="data"><span>9</span>个月</div>
-					</div>
-					<div class="pro-money">
-						<h3>剩余可投金额</h3>
-						<div class="data">
-							<span>140000</span>元
-						</div>
-					</div>
-				</div>
-				<div class="pro-btn">
-					<a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				</div>
-			</div>
-		</div>
-
-		  <div class="pro-box pro-full">
-			  <div class="pro-top">
-				  <h3>个人信用消费借款</h3>
-				  <p>动力金融网特选小额信贷消费产品</p>
-			  </div>
-			  <div class="pro-main" style="height:260px;">
-				  <div class="pro-rate">
-					  <div class="rate">5<span>%</span></div>
-					  <h3>历史年化收益率</h3>
-				  </div>
-				  <div class="pro-data clearfix">
-					  <div class="pro-cycle">
-						  <h3>投资周期</h3>
-						  <div class="data"><span>9</span>个月</div>
-					  </div>
-					  <div class="pro-money">
-						  <h3>剩余可投金额</h3>
-						  <div class="data">
-							  <span>140000</span>元
-						  </div>
-					  </div>
-				  </div>
-				  <div class="pro-btn">
-					  <a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a><!--已满标按钮-->
-				  </div>
-			  </div>
-		  </div>
+<!--		  <div class="pro-box">-->
+<!--			  <div class="pro-top">-->
+<!--				  <h3>个人信用消费借款</h3>-->
+<!--				  <p>动力金融网特选小额信贷消费产品</p>-->
+<!--			  </div>-->
+<!--			  <div class="pro-main" style="height:260px;">-->
+<!--				  <div class="pro-rate">-->
+<!--					  <div class="rate">5<span>%</span></div>-->
+<!--					  <h3>历史年化收益率</h3>-->
+<!--				  </div>-->
+<!--				  <div class="pro-data clearfix">-->
+<!--					  <div class="pro-cycle">-->
+<!--						  <h3>投资周期</h3>-->
+<!--						  <div class="data"><span>9</span>个月</div>-->
+<!--					  </div>-->
+<!--					  <div class="pro-money">-->
+<!--						  <h3>剩余可投金额</h3>-->
+<!--						  <div class="data">-->
+<!--							  <span>140000</span>元-->
+<!--						  </div>-->
+<!--					  </div>-->
+<!--				  </div>-->
+<!--				  <div class="pro-btn">-->
+<!--					  <a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a>&lt;!&ndash;已满标按钮&ndash;&gt;-->
+<!--				  </div>-->
+<!--			  </div>-->
+<!--		  </div>-->
 
 	  <div style="clear:both"></div>
       <!--页码 start-->
 	  <table class="page_bar">
 		<tbody>
-		<tr>
-			<td>
-				共20条3页　当前为第2页　
-				<a id="linkHomePage" th:href="@{/loan/loan}">首页</a>
-				<a id="linkPreviousPage" th:href="@{/loan/loan}">上一页</a>
-				<a id="linkNextPage" th:href="@{/loan/loan}">下一页 </a>
-				<a id="linkLastPage" th:href="@{/loan/loan}">尾页</a>
-			</td>
-		</tr>
+			<tr>
+				<td>
+					<span th:text="|共${total}条${totalPage}页　当前为第${currentPage}页　|"></span>
+					<span th:switch="${currentPage}">
+						<span th:case="1">
+							首页
+							上一页
+						</span>
+						<span th:case="*">
+							<a id="linkHomePage" th:href="@{/loan/loan(ptype=${ptype},currentPage=1)}">首页</a>
+							<a id="linkPreviousPage" th:href="@{/loan/loan(ptype=${ptype},currentPage=${currentPage - 1})}">上一页</a>
+						</span>
+					</span>
+					<span th:switch="${currentPage}">
+						<span th:case="${totalPage}">
+							下一页
+							尾页
+						</span>
+						<span th:case="*">
+								<a id="linkNextPage" th:href="@{/loan/loan(ptype=${ptype},currentPage=${currentPage + 1})}">下一页 </a>
+								<a id="linkLastPage" th:href="@{/loan/loan(ptype=${ptype},currentPage=${totalPage})}">尾页</a>
+						</span>
+
+					</span>
+				</td>
+			</tr>
 		</tbody>
-	</table>
+	  </table>
 	<!--页码 end-->
+
   	</div>
-  
+
 	<div class="right-side">
 	    <div class="side-box fixed" id="roll" style="top: 0px;">
 	        <div id="advertArea"></div>
@@ -286,7 +141,7 @@
 	        <!--广告位end-->
 	    </div>
 	</div>
-	</div> 
+	</div>
 </div>
 <!--产品列表end-->
 
